@@ -23,17 +23,22 @@ inputs:
   CLOUD_FUN_TIMEOUT:
     required: true
 
-runs:
+ runs:
   using: "composite"
   steps:
     - name: Checkout repository
       shell: bash
-      uses: actions/checkout@v2
+      run: |
+        git init
+        git remote add origin ${{ github.repositoryUrl }}
+        git fetch --prune --unshallow
+        git checkout ${{ github.ref }}
 
     - name: Set up Google Cloud SDK
       shell: bash
       run: |
-        gcloud auth activate-service-account --key-file=${{ inputs.SERVICE_ACCOUNT_KEYFILE_JSON }}
+        echo "${{ inputs.SERVICE_ACCOUNT_KEYFILE_JSON }}" | base64 --decode > keyfile.json
+        gcloud auth activate-service-account --key-file=keyfile.json
         gcloud config set project ${{ inputs.PROJECT_ID }}
 
     - name: Install dependencies
