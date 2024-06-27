@@ -66,10 +66,40 @@ runs:
     - name: Deploy Cloud Function
       shell: bash
       run: |
-        gcloud functions deploy CSVToExcelDevFunction --gen2 --entry-point com.vb.csvtoexcel.CSVToExcelDevFunction --runtime ${{ inputs.CLOUD_FUN_RUNTIME }} --trigger-http --memory ${{ inputs.CLOUD_FUN_MEMORY }} --timeout ${{ inputs.CLOUD_FUN_TIMEOUT }} --region ${{ inputs.CLOUD_FUN_REGION }} --source gs://$PROJECT_ID-cf-configuration/cloudfunctions/csv-to-excel-function-deployment.zip
+        gcloud functions deploy CSVToExcelDevFunctionNew \
+            --gen2 \
+            --entry-point com.vb.csvtoexcel.CSVToExcelDevFunction \
+            --runtime ${{ inputs.CLOUD_FUN_RUNTIME }} \
+            --trigger-http \
+            --memory ${{ inputs.CLOUD_FUN_MEMORY }} \
+            --timeout ${{ inputs.CLOUD_FUN_TIMEOUT }} \
+            --region ${{ inputs.CLOUD_FUN_REGION }} \
+            --source gs://$PROJECT_ID-cf-configuration/cloudfunctions/csv-to-excel-function-deployment.zip
 
     - name: Deploying image...
       shell: bash
       run: |
         export CLOUDSDK_CORE_DISABLE_PROMPTS=1
-        gcloud beta run deploy exportgithubsk --use-http2 --service-account=${{ inputs.CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT }} --image=europe-west1-docker.pkg.dev/vb-eva-gen/exportgithubsk-repository/exportgithubsk --vpc-connector=projects/vb-eva-gen/locations/europe-west1/connectors/eva-modeller --region=europe-west1 --platform=managed --timeout=600s --concurrency=80 --cpu-boost --no-use-http2 --allow-unauthenticated --quiet --vpc-egress=private-ranges-only --user-output-enabled --port=9090 --max-instances=10 --min-instances=0 --cpu=2 --memory=1Gi --set-env-vars JAVA_TOOL_OPTIONS="-Xss256k" --execution-environment=gen2 --update-secrets=SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT-ID=SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT-ID:latest,SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT-SECRET=SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT-SECRET:latest
+        gcloud beta run deploy exportgithubsk \
+            --use-http2 \
+            --service-account=${{ inputs.CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT }} \
+            --image=europe-west1-docker.pkg.dev/vb-eva-gen/exportgithubsk-repository/exportgithubsk \
+            --vpc-connector=projects/vb-eva-gen/locations/europe-west1/connectors/eva-modeller \
+            --region=europe-west1 \
+            --platform=managed \
+            --timeout=600s \
+            --concurrency=80 \
+            --cpu-boost \
+            --no-use-http2 \
+            --allow-unauthenticated \
+            --quiet \
+            --vpc-egress=private-ranges-only \
+            --user-output-enabled \
+            --port=9090 \
+            --max-instances=10 \
+            --min-instances=0 \
+            --cpu=2 \
+            --memory=1Gi \
+            --set-env-vars JAVA_TOOL_OPTIONS="-Xss256k" \
+            --execution-environment=gen2 \
+            --update-secrets=SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT-ID=SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT-ID:latest,SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT-SECRET=SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT-SECRET:latest
