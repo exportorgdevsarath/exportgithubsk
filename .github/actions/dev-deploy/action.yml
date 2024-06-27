@@ -27,19 +27,23 @@ runs:
   using: "composite"
   steps:
     - name: Checkout repository
+      shell: bash
       uses: actions/checkout@v2
 
     - name: Set up Google Cloud SDK
+      shell: bash
       run: |
         gcloud auth activate-service-account --key-file=${{ inputs.SERVICE_ACCOUNT_KEYFILE_JSON }}
         gcloud config set project ${{ inputs.PROJECT_ID }}
 
     - name: Install dependencies
+      shell: bash
       run: |
         sudo apt-get update
         sudo apt-get install -y openjdk-17-jdk maven zip
 
     - name: Build the cloud function
+      shell: bash
       run: |
         mkdir -p deployment
         cd BackendApp/src/functions/java
@@ -53,10 +57,12 @@ runs:
         cd ..
 
     - name: Upload to Google Cloud Storage
+      shell: bash
       run: |
         gsutil cp csv-to-excel-function-deployment.zip gs://$PROJECT_ID-cf-configuration/cloudfunctions/
 
     - name: Deploy Cloud Function
+      shell: bash
       run: |
         gcloud functions deploy CSVToExcelDevFunction \
             --gen2 \
