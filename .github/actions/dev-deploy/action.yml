@@ -5,6 +5,12 @@ inputs:
   CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT:
     required: true
 
+  SERVICE_ACCOUNT_KEYFILE_JSON:
+    required: true
+
+  PROJECT_ID:
+    required: true
+
 runs:
   using: "composite"
 
@@ -15,8 +21,8 @@ runs:
   - name: Set up Google Cloud SDK
     uses: google-github-actions/setup-gcloud@v1
     with:
-      service_account_key: ${{ secrets.SERVICE_ACCOUNT_KEYFILE_JSON }}
-      project_id: ${{ secrets.PROJECT_ID }}
+      service_account_key: ${{ inputs.SERVICE_ACCOUNT_KEYFILE_JSON }}
+      project_id: ${{ inputs.PROJECT_ID }}
 
   - name: Install dependencies
     run: |
@@ -42,7 +48,7 @@ runs:
 
   - name: Deploy Cloud Function
     run: |
-      gcloud functions deploy CSVToExcelDevFunction --gen2 --entry-point com.vb.csvtoexcel.CSVToExcelDevFunction --runtime ${{ secrets.CLOUD_FUN_RUNTIME }} --trigger-http --memory ${{ secrets.CLOUD_FUN_MEMORY }} --timeout ${{ secrets.CLOUD_FUN_TIMEOUT }} --region ${{ secrets.CLOUD_FUN_REGION }} --source gs://$PROJECT_ID-cf-configuration/cloudfunctions/csv-to-excel-function-deployment.zip
+      gcloud functions deploy CSVToExcelDevFunction --gen2 --entry-point com.vb.csvtoexcel.CSVToExcelDevFunction --runtime ${{ inputs.CLOUD_FUN_RUNTIME }} --trigger-http --memory ${{ inputs.CLOUD_FUN_MEMORY }} --timeout ${{ inputs.CLOUD_FUN_TIMEOUT }} --region ${{ inputs.CLOUD_FUN_REGION }} --source gs://$PROJECT_ID-cf-configuration/cloudfunctions/csv-to-excel-function-deployment.zip
   
   steps:
   - name: Deploying image...
