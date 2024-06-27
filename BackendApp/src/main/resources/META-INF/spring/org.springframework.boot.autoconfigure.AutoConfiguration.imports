@@ -1,0 +1,3 @@
+com.vanenburgdemo.exapp.config.ApplicationRepositoriesAutoConfiguration
+com.vanenburgdemo.exapp.config.ApplicationTransactionManagersAutoConfig
+com.vanenburgdemo.exapp.config.ApplicationProvidersAutoConfiguration

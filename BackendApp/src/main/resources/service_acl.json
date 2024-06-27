@@ -1,0 +1,181 @@
+{
+  "workflowhistory": {
+    "post": {
+      "/{workflowType}/{modelid}/datatable": [
+        "PermitAll"
+      ]
+    }
+  },
+  "rappitjitgrouprolemapping": {
+    "post": {
+      "/datatable": [
+        "App Admin"
+      ],
+      "/": [
+        "App Admin"
+      ]
+    },
+    "put": {
+      "/": [
+        "App Admin"
+      ]
+    },
+    "delete": {
+      "/{ids}": [
+        "App Admin"
+      ]
+    }
+  },
+  "attachments": {
+    "post": {
+      "/link": [
+        "PermitAll"
+      ],
+      "/upload": [
+        "PermitAll"
+      ]
+    },
+    "get": {
+      "/download/attachment/{attachment_id}": [
+        "PermitAll"
+      ],
+      "/download/inline/{attachment_id}": [
+        "PermitAll"
+      ],
+      "/all/{modelKey}": [
+        "PermitAll"
+      ]
+    },
+    "delete": {
+      "/{ids}}": [
+        "PermitAll"
+      ],
+      "/attachments/{ids}": [
+        "PermitAll"
+      ]
+    }
+  },
+  "workflowconfig": {
+    "get": {
+      "/getconfig/{workflowType}": [
+        "PermitAll"
+      ]
+    }
+  },
+  "changelogs": {
+    "post": {
+      "/datatable/{entityName}/{entityId}/{fieldName}/{fromModifiedDate}": [
+        "PermitAll"
+      ]
+    }
+  },
+  "otp": {
+    "post": {
+      "/validateotp/{otp}": [
+        "PermitAll"
+      ],
+      "/generateandsendotp": [
+        "PermitAll"
+      ],
+      "/forgotpasswordotp": [
+        "PermitAll"
+      ]
+    }
+  },
+  "usernotificationsyncinfo": {
+    "put": {
+      "/updatesynctime": [
+        "PermitAll"
+      ]
+    }
+  },
+  "rappitexports": {
+    "post": {
+      "/datatable": [
+        "PermitAll"
+      ],
+      "/": [
+        "PermitAll"
+      ]
+    },
+    "get": {
+      "/download/{export_id}": [
+        "PermitAll"
+      ]
+    },
+    "put": {
+      "/": [
+        "PermitAll"
+      ]
+    }
+  },
+  "deploy": {
+    "post": {
+      "/setup": [
+        "App Admin"
+      ]
+    }
+  },
+  "environmentinfo": {
+    "get": {
+      "/": [
+        "PermitAll"
+      ]
+    }
+  },
+  "applicationusers": {
+    "post": {
+      "/datatable": [
+        "App Admin"
+      ],
+      "/": [
+        "App Admin"
+      ]
+    },
+    "get": {
+      "/roles": [
+        "PermitAll"
+      ],
+      "/byemail/{email}": [
+        "App Admin"
+      ],
+      "/user-details": [
+        "PermitAll"
+      ],
+      "/{sid}": [
+        "App Admin"
+      ],
+      "/autosuggest": [
+        "App Admin"
+      ]
+    },
+    "put": {
+      "/": [
+        "App Admin"
+      ]
+    },
+    "delete": {
+      "/{ids}": [
+        "App Admin"
+      ]
+    },
+    "options": {}
+  },
+  "rappitexporttemplates": {
+    "post": {
+      "/attachmentidbytype": [
+        "PermitAll"
+      ],
+      "/setup": [
+        "App Admin"
+      ]
+    }
+  },
+  "notifications": {
+    "post": {
+      "/notifications/datatable": [
+        "PermitAll"
+      ]
+    }
+  }
+}

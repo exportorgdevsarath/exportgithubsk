@@ -1,0 +1,48 @@
+{
+  "left" : [ {
+    "accessControl" : [ "App Admin" ],
+    "outline" : false,
+    "label" : "MENU",
+    "element" : "menuItem"
+  }, {
+    "pathsInvolved" : [ "/applicationuser/applicationuserlist", "/applicationuser/applicationuserdetail" ],
+    "accessControl" : [ "App Admin" ],
+    "onClick" : "navigate_to_page",
+    "outline" : false,
+    "label" : "APPLICATION_USER",
+    "page" : {
+      "sid" : "373dd546-470a-4f34-9e66-cdf7acfcc46b",
+      "name" : "Application Users",
+      "url" : "/applicationuser/applicationuserlist"
+    },
+    "element" : "menuItem"
+  }, {
+    "customUrl" : "/exports/exportspage",
+    "accessControl" : [ "all" ],
+    "onClick" : "navigate_to_url",
+    "outline" : false,
+    "valueChange" : true,
+    "currentNode" : "export-menu",
+    "icon" : {
+      "type" : "icon",
+      "icon" : {
+        "label" : "fas fa-upload",
+        "value" : "fas fa-upload"
+      },
+      "iconColor" : "#000000",
+      "iconSize" : "18px"
+    },
+    "label" : "EXPORTS",
+    "element" : "menuItem"
+  } ],
+  "topBarLeft" : [ ],
+  "topBarMiddle" : [ ],
+  "topBarRight" : [ {
+    "languages" : [ {
+      "code" : "en",
+      "name" : "English"
+    } ],
+    "element" : "language"
+  } ],
+  "right" : [ ]
+}
