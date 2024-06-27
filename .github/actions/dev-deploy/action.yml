@@ -23,7 +23,7 @@ inputs:
   CLOUD_FUN_TIMEOUT:
     required: true
 
- runs:
+runs:
   using: "composite"
   steps:
     - name: Checkout repository
