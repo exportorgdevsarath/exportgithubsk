@@ -4,7 +4,7 @@ on: workflow_dispatch
 
 jobs:
   deployment:
-    environment: dev
+    environment: development
     runs-on: ubuntu-latest
     container: node:16-alpine
     
@@ -12,7 +12,7 @@ jobs:
     - name: Checking out repo...
       uses: actions/checkout@v3
       with:
-        ref: dev
+        ref: development
     
     - name: Building...
       uses: ./.github/actions/dev-build
