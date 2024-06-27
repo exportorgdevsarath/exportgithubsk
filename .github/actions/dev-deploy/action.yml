@@ -11,6 +11,18 @@ inputs:
   PROJECT_ID:
     required: true
 
+  CLOUD_FUN_MEMORY:
+    required: true
+
+  CLOUD_FUN_REGION:
+    required: true
+
+  CLOUD_FUN_RUNTIME:
+    required: true
+
+  CLOUD_FUN_TIMEOUT:
+    required: true
+
 runs:
   using: "composite"
 
