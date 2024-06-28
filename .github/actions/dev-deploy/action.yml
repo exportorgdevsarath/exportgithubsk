@@ -36,8 +36,7 @@ runs:
     - name: Github authentication
       uses: google-github-actions/auth@v1
       with:
-        credentials_json: ${{inputs.SERVICE_ACCOUNT_KEYFILE_JSON}}
-        ref: development
+        CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT: ${{ secrets.CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT }}
         
     - name: Checking out repo...
       uses: actions/checkout@v3
