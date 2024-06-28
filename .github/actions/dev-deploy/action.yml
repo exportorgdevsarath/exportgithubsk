@@ -32,6 +32,12 @@ runs:
         apk add --no-cache git maven bash curl wget
         apk --no-cache add openjdk17-jdk
         apk add --no-cache python3 py3-pip
+
+    - name: Debugging Service Account Key
+      shell: bash
+      run: |
+        echo "${{ inputs.SERVICE_ACCOUNT_KEYFILE_JSON }}" | head -c 100
+        echo "${{ inputs.SERVICE_ACCOUNT_KEYFILE_JSON }}" | jq .
         
     - name: Checking out repo...
       uses: actions/checkout@v3
