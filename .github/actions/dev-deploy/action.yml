@@ -32,11 +32,6 @@ runs:
         apk add --no-cache git maven bash curl wget
         apk --no-cache add openjdk17-jdk
         apk add --no-cache python3 py3-pip
-  
-    - name: Github authentication
-      uses: google-github-actions/auth@v1
-      with:
-        CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT: ${{ secrets.CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT }}
         
     - name: Checking out repo...
       uses: actions/checkout@v3
