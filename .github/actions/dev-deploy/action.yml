@@ -49,7 +49,7 @@ runs:
       shell: bash
       run: |
         mkdir -p deployment
-        cd BackendApp
+        cd BackendApp/src/functions/java
         mvn clean package
         ls -l target
         cp target/csv-to-excel-function-1.0-SNAPSHOT.jar ../../../../deployment/
