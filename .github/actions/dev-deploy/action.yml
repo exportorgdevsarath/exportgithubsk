@@ -26,6 +26,29 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Setting up environment for build...
+      shell: sh
+      run: |
+        apk add --no-cache git maven bash curl wget
+        apk --no-cache add openjdk17-jdk
+        apk add --no-cache python3 py3-pip
+  
+    - name: Github authentication
+      uses: google-github-actions/auth@v1
+      with:
+        credentials_json: ${{inputs.SERVICE_ACCOUNT_KEYFILE_JSON}}
+
+    - name: Checking out repo...
+      uses: actions/checkout@v3
+      with:
+        ref: development
+    
+    - name: Building project...
+      shell: sh
+      run: |
+        sed -i 's/${env.ARTIFACTORY_USER}/${{inputs.ARTIFACTORY_USER}}/' .m2/settings.xml
+        sed -i 's/${env.ARTIFACTORY_PASS}/${{inputs.ARTIFACTORY_PASS}}/' .m2/settings.xml
+        npm install -g @angular/cli
 
     - name: Build the cloud function
       shell: bash
