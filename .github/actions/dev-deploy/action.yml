@@ -48,7 +48,7 @@ runs:
     - name: Install zip
       shell: sh
       run: |
-        sudo apt-get install -y zip
+        apt-get install -y zip
 
     - name: Build the cloud function
       shell: bash
