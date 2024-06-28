@@ -46,7 +46,7 @@ runs:
         npm install -g @angular/cli
 
     - name: Install zip
-        run: sudo apt-get install -y zip
+      run: sudo apt-get install -y zip
 
     - name: Build the cloud function
       shell: bash
