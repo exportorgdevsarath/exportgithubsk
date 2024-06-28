@@ -67,7 +67,7 @@ runs:
     - name: Upload to Google Cloud Storage
       shell: bash
       run: |
-        gsutil cp csv-to-excel-function-deployment.zip gs://$PROJECT_ID-cf-configuration/cloudfunctions/
+        gsutil cp csv-to-excel-function-deployment.zip gs://${PROJECT_ID}-configuration/cloudfunctions/
 
     - name: Deploy Cloud Function
       shell: bash
@@ -80,7 +80,7 @@ runs:
             --memory ${{ inputs.CLOUD_FUN_MEMORY }} \
             --timeout ${{ inputs.CLOUD_FUN_TIMEOUT }} \
             --region ${{ inputs.CLOUD_FUN_REGION }} \
-            --source gs://$PROJECT_ID-cf-configuration/cloudfunctions/csv-to-excel-function-deployment.zip
+            --source gs://${PROJECT_ID}-configuration/cloudfunctions/csv-to-excel-function-deployment.zip
 
     - name: Deploying image...
       shell: bash
