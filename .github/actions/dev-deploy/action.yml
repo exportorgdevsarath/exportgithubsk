@@ -67,7 +67,7 @@ runs:
     - name: Authenticate to Google Cloud
       shell: bash
       env:
-        GCP_CREDENTIALS: ${{ secrets.SERVICE_ACCOUNT_KEYFILE_JSON }}
+        GCP_CREDENTIALS: ${{ inputs.SERVICE_ACCOUNT_KEYFILE_JSON }}
       run: |
         echo "${GCP_CREDENTIALS}" > gha-creds.json
         gcloud auth activate-service-account --key-file=gha-creds.json
