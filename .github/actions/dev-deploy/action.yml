@@ -26,12 +26,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-  
-    - name: Install dependencies
-      shell: bash
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y openjdk-17-jdk maven zip
 
     - name: Build the cloud function
       shell: bash
