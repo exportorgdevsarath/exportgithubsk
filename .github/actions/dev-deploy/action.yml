@@ -26,14 +26,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Checkout repository
-      shell: bash
-      run: |
-        git init
-        git remote add origin ${{ github.repositoryUrl }}
-        git fetch --prune --unshallow
-        git checkout ${{ github.ref }}
-
+  
     - name: Install dependencies
       shell: bash
       run: |
