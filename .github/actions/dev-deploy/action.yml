@@ -64,6 +64,15 @@ runs:
         zip -r ../csv-to-excel-function-deployment.zip .
         cd ..
 
+    - name: Authenticate to Google Cloud
+      shell: bash
+      env:
+        GCP_CREDENTIALS: ${{ secrets.CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT }}
+      run: |
+        echo "${GCP_CREDENTIALS}" > gha-creds.json
+        gcloud auth activate-service-account --key-file=gha-creds.json
+        gcloud config set project ${{ inputs.PROJECT_ID }}
+
     - name: Upload to Google Cloud Storage
       shell: bash
       run: |
@@ -73,8 +82,6 @@ runs:
       shell: bash
       run: |
         gcloud functions deploy CSVToExcelHubFunction --gen2 --service-account=${{ inputs.CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT }} --entry-point com.vb.csvtoexcel.CSVToExcelFunction --runtime java17 --trigger-http --memory 2048MB --timeout 540s --region europe-west1 --source gs://vb-eva-gen-configuration/cfunction/csv-to-excel-function-deployment.zip
-      with:
-        CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT: ${{ secrets.CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT }}
         
     - name: Deploying image...
       shell: bash
