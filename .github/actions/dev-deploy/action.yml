@@ -42,7 +42,7 @@ runs:
     - name: Checking out repo...
       uses: actions/checkout@v3
       with:
-        ref: development
+        ref: dev
     
     - name: Building project...
       shell: sh
