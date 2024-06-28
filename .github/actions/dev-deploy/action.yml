@@ -37,7 +37,8 @@ runs:
       uses: google-github-actions/auth@v1
       with:
         credentials_json: ${{inputs.SERVICE_ACCOUNT_KEYFILE_JSON}}
-
+        ref: development
+        
     - name: Checking out repo...
       uses: actions/checkout@v3
       with:
