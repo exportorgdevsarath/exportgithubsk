@@ -60,16 +60,16 @@ runs:
     - name: Debug DEPLOY_CLOUD_FUNCTION
       shell: bash
       run: |
-        echo "DEPLOY_CLOUD_FUNCTION is set to ${{ inputs.DEPLOY_CLOUD_FUNCTION }}"
+        echo "DEPLOY_CLOUD_FUNCTION is set to ${{ env.DEPLOY_CLOUD_FUNCTION }}"
         
     - name: Install zip
-      if: ${{ inputs.DEPLOY_CLOUD_FUNCTION == 'true' }}
+      if: ${{ env.DEPLOY_CLOUD_FUNCTION == 'true' }}
       shell: sh
       run: |
         apk add --no-cache zip
 
     - name: Build the cloud function
-      if: ${{ inputs.DEPLOY_CLOUD_FUNCTION == 'true' }}
+      if: ${{ env.DEPLOY_CLOUD_FUNCTION == 'true' }}
       shell: bash
       run: |
         mkdir -p deployment
