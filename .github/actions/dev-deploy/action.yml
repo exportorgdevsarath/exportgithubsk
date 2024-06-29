@@ -79,11 +79,13 @@ runs:
         cd ..
 
     - name: Upload to Google Cloud Storage
+      if: ${{ inputs.DEPLOY_CLOUD_FUNCTION == 'true' }}
       shell: bash
       run: |
         gsutil cp csv-to-excel-function-deployment.zip gs://vb-eva-gen-configuration/cloudfunctions/
     
     - name: Deploy Cloud Function
+      if: ${{ inputs.DEPLOY_CLOUD_FUNCTION == 'true' }}
       shell: bash
       run: |
         gcloud functions deploy CSVToExcelHubFunction --gen2 --service-account=${{ inputs.CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT }} --entry-point com.vb.csvtoexcel.CSVToExcelFunction --runtime java17 --trigger-http --memory 2048MB --timeout 540s --region europe-west1 --source gs://vb-eva-gen-configuration/cfunction/csv-to-excel-function-deployment.zip
