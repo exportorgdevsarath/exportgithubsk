@@ -68,12 +68,16 @@ runs:
       shell: bash
       run: |
         gsutil cp csv-to-excel-function-deployment.zip gs://vb-eva-gen-configuration/cloudfunctions/
-
+    
+    - name: Github authentication
+      uses: google-github-actions/auth@v1
+      with:
+        credentials_json: ${{inputs.SERVICE_ACCOUNT_KEYFILE_JSON}}
     
     - name: Deploy Cloud Function
       shell: bash
       env:
-          GCP_CREDENTIALS: ${{ inputs.SERVICE_ACCOUNT_KEY_JSON }}
+          GCP_CREDENTIALS: ${{inputs.SERVICE_ACCOUNT_KEY_JSON}}
       run: |
         echo "${GCP_CREDENTIALS}" > gha-creds.json
         gcloud auth activate-service-account --key-file=gha-creds.json
