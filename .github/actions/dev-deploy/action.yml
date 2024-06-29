@@ -23,11 +23,14 @@ inputs:
   CLOUD_FUN_TIMEOUT:
     required: true
 
+  DEPLOY_CLOUD_FUNCTION:
+    required: true
+
 runs:
   using: "composite"
   steps:
     - name: Deploying image...
-      if: ${{ secrets.DEPLOY_CLOUD_FUNCTION == 'true' }}
+      if: ${{ inputs.DEPLOY_CLOUD_FUNCTION == 'true' }}
       shell: bash
       run: |
         export CLOUDSDK_CORE_DISABLE_PROMPTS=1
@@ -61,7 +64,7 @@ runs:
         apk add --no-cache zip
 
     - name: Build the cloud function
-      if: ${{ secrets.DEPLOY_CLOUD_FUNCTION == 'true' }}
+      if: ${{ inputs.DEPLOY_CLOUD_FUNCTION == 'true' }}
       shell: bash
       run: |
         mkdir -p deployment
