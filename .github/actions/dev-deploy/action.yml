@@ -23,9 +23,6 @@ inputs:
   CLOUD_FUN_TIMEOUT:
     required: true
 
-  DEPLOY_CLOUD_FUNCTION:
-    required: true
-
 runs:
   using: "composite"
   steps:
