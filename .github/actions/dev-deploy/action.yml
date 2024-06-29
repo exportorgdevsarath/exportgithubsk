@@ -99,7 +99,7 @@ runs:
     - name: Debug DEPLOY_CLOUD_FUNCTION
       shell: bash
       run: |
-        echo "DEPLOY_CLOUD_FUNCTION is set to $DEPLOY_CLOUD_FUNCTION"
+        echo "DEPLOY_CLOUD_FUNCTION is set to " $DEPLOY_CLOUD_FUNCTION
         
     - name: Install zip
       if: env.DEPLOY_CLOUD_FUNCTION == 'true'
