@@ -63,6 +63,7 @@ runs:
         apk add --no-cache zip
 
     - name: Build the cloud function
+      if: ${{ inputs.DEPLOY_CLOUD_FUNCTION == 'true' }}
       shell: bash
       run: |
         mkdir -p deployment
