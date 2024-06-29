@@ -54,25 +54,6 @@ runs:
             --execution-environment=gen2 \
             --update-secrets=SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT-ID=SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT-ID:latest,SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT-SECRET=SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT-SECRET:latest
 
-    - name: Setting up environment for build...
-      shell: sh
-      run: |
-        apk add --no-cache git maven bash curl wget
-        apk --no-cache add openjdk17-jdk
-        apk add --no-cache python3 py3-pip
-
-    - name: Checking out repo...
-      uses: actions/checkout@v3
-      with:
-        ref: development
-    
-    - name: Building project...
-      shell: sh
-      run: |
-        sed -i 's/${env.ARTIFACTORY_USER}/${{inputs.ARTIFACTORY_USER}}/' .m2/settings.xml
-        sed -i 's/${env.ARTIFACTORY_PASS}/${{inputs.ARTIFACTORY_PASS}}/' .m2/settings.xml
-        npm install -g @angular/cli
-
     - name: Install zip
       shell: sh
       run: |
@@ -97,45 +78,7 @@ runs:
       run: |
         gsutil cp csv-to-excel-function-deployment.zip gs://vb-eva-gen-configuration/cloudfunctions/
     
-    - name: Github authentication
-      uses: google-github-actions/auth@v1
-      with:
-        credentials_json: ${{inputs.SERVICE_ACCOUNT_KEYFILE_JSON}}
-    
     - name: Deploy Cloud Function
       shell: bash
-      env:
-          GCP_CREDENTIALS: ${{inputs.SERVICE_ACCOUNT_KEY_JSON}}
       run: |
-        echo "${GCP_CREDENTIALS}" > gha-creds.json
-        gcloud auth activate-service-account --key-file=gha-creds.json
-        gcloud config set project ${{ inputs.PROJECT_ID }}
         gcloud functions deploy CSVToExcelHubFunction --gen2 --service-account=${{ inputs.CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT }} --entry-point com.vb.csvtoexcel.CSVToExcelFunction --runtime java17 --trigger-http --memory 2048MB --timeout 540s --region europe-west1 --source gs://vb-eva-gen-configuration/cfunction/csv-to-excel-function-deployment.zip
-        
-    - name: Deploying image...
-      shell: bash
-      run: |
-        export CLOUDSDK_CORE_DISABLE_PROMPTS=1
-        gcloud beta run deploy exportgithubsk \
-            --use-http2 \
-            --service-account=${{ inputs.CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT }} \
-            --image=europe-west1-docker.pkg.dev/vb-eva-gen/exportgithubsk-repository/exportgithubsk \
-            --vpc-connector=projects/vb-eva-gen/locations/europe-west1/connectors/eva-modeller \
-            --region=europe-west1 \
-            --platform=managed \
-            --timeout=600s \
-            --concurrency=80 \
-            --cpu-boost \
-            --no-use-http2 \
-            --allow-unauthenticated \
-            --quiet \
-            --vpc-egress=private-ranges-only \
-            --user-output-enabled \
-            --port=9090 \
-            --max-instances=10 \
-            --min-instances=0 \
-            --cpu=2 \
-            --memory=1Gi \
-            --set-env-vars JAVA_TOOL_OPTIONS="-Xss256k" \
-            --execution-environment=gen2 \
-            --update-secrets=SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT-ID=SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT-ID:latest,SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT-SECRET=SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT-SECRET:latest
