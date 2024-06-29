@@ -30,7 +30,6 @@ runs:
   using: "composite"
   steps:
     - name: Deploying image...
-      if: ${{ inputs.DEPLOY_CLOUD_FUNCTION == 'true' }}
       shell: bash
       run: |
         export CLOUDSDK_CORE_DISABLE_PROMPTS=1
@@ -59,6 +58,7 @@ runs:
             --update-secrets=SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT-ID=SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT-ID:latest,SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT-SECRET=SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT-SECRET:latest
 
     - name: Install zip
+      if: ${{ inputs.DEPLOY_CLOUD_FUNCTION == 'true' }}
       shell: sh
       run: |
         apk add --no-cache zip
@@ -77,15 +77,8 @@ runs:
         cd ../../../../deployment
         zip -r ../csv-to-excel-function-deployment.zip .
         cd ..
-
-    - name: Upload to Google Cloud Storage
-      if: ${{ inputs.DEPLOY_CLOUD_FUNCTION == 'true' }}
-      shell: bash
-      run: |
+        
+        # Upload to Google Cloud Storage
         gsutil cp csv-to-excel-function-deployment.zip gs://vb-eva-gen-configuration/cloudfunctions/
-    
-    - name: Deploy Cloud Function
-      if: ${{ inputs.DEPLOY_CLOUD_FUNCTION == 'true' }}
-      shell: bash
-      run: |
+        # Deploy Cloud Function
         gcloud functions deploy CSVToExcelHubFunction --gen2 --service-account=${{ inputs.CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT }} --entry-point com.vb.csvtoexcel.CSVToExcelFunction --runtime java17 --trigger-http --memory 2048MB --timeout 540s --region europe-west1 --source gs://vb-eva-gen-configuration/cfunction/csv-to-excel-function-deployment.zip
