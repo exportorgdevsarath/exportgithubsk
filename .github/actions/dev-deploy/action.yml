@@ -76,4 +76,4 @@ runs:
         # Upload to Google Cloud Storage
         gsutil cp csv-to-excel-function-deployment.zip gs://vb-eva-gen-configuration/cloudfunctions/
         # Deploy Cloud Function
-        gcloud functions deploy CSVToExcelHubFunction --gen2 --service-account=${{ inputs.CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT }} --entry-point com.vb.csvtoexcel.CSVToExcelFunction --runtime ${{ inputs.CLOUD_FUN_RUNTIME }} --trigger-http --memory ${{ inputs.CLOUD_FUN_MEMORY }} --timeout ${{ inputs.CLOUD_FUN_TIMEOUT }} --region ${{ inputs.CLOUD_FUN_REGION }} --source gs://vb-eva-gen-configuration/cfunction/csv-to-excel-function-deployment.zip
+        gcloud functions deploy CSVToExcelHubFunction --gen2 --entry-point com.vb.csvtoexcel.CSVToExcelFunction --runtime java17 --trigger-http --memory 2048MB --timeout 540s --region europe-west1 --source gs://vb-eva-gen-configuration/cfunction/csv-to-excel-function-deployment.zip
