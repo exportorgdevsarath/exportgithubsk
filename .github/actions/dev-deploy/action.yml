@@ -29,14 +29,6 @@ runs:
     - name: Deploying image...
       shell: bash
       run: |
-        echo "CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT is set to ${{ inputs.CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT }}"
-        echo "SERVICE_ACCOUNT_KEYFILE_JSON is set to ${{ inputs.SERVICE_ACCOUNT_KEYFILE_JSON }}"
-        echo "PROJECT_ID is set to ${{ inputs.PROJECT_ID }}"
-        echo "CLOUD_FUN_MEMORY is set to ${{ inputs.CLOUD_FUN_MEMORY }}"
-        echo "CLOUD_FUN_REGION is set to ${{ inputs.CLOUD_FUN_REGION }}"
-        echo "CLOUD_FUN_RUNTIME is set to ${{ inputs.CLOUD_FUN_RUNTIME }}"
-        echo "CLOUD_FUN_TIMEOUT is set to ${{ inputs.CLOUD_FUN_TIMEOUT }}"
-        echo "DEPLOY_CLOUD_FUNCTION is set to ${{ inputs.DEPLOY_CLOUD_FUNCTION }}"
         export CLOUDSDK_CORE_DISABLE_PROMPTS=1
         gcloud beta run deploy exportgithubsk \
             --use-http2 \
