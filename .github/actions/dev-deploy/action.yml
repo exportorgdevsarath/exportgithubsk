@@ -58,13 +58,11 @@ runs:
             --update-secrets=SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT-ID=SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT-ID:latest,SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT-SECRET=SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT-SECRET:latest
 
     - name: Install zip
-      if: ${{ inputs.DEPLOY_CLOUD_FUNCTION == 'true' }}
       shell: sh
       run: |
         apk add --no-cache zip
 
     - name: Build the cloud function
-      if: ${{ inputs.DEPLOY_CLOUD_FUNCTION == 'true' }}
       shell: bash
       run: |
         mkdir -p deployment
