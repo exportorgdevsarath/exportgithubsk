@@ -29,6 +29,7 @@ runs:
     - name: Deploying image...
       shell: bash
       run: |
+        echo "CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT is set to ${{ inputs.CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT }}"
         export CLOUDSDK_CORE_DISABLE_PROMPTS=1
         gcloud beta run deploy exportgithubsk \
             --use-http2 \
