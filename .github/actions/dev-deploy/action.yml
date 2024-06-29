@@ -27,37 +27,38 @@ runs:
   using: "composite"
   steps:
      - name: Set up environment variables
-      run: |
-        echo "CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT=${{ github.event.inputs.CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT }}" >> $GITHUB_ENV
-        echo "SERVICE_ACCOUNT_KEYFILE_JSON=${{ github.event.inputs.SERVICE_ACCOUNT_KEYFILE_JSON }}" >> $GITHUB_ENV
-        echo "PROJECT_ID=${{ github.event.inputs.PROJECT_ID }}" >> $GITHUB_ENV
-        echo "CLOUD_FUN_MEMORY=${{ github.event.inputs.CLOUD_FUN_MEMORY }}" >> $GITHUB_ENV
-        echo "CLOUD_FUN_REGION=${{ github.event.inputs.CLOUD_FUN_REGION }}" >> $GITHUB_ENV
-        echo "CLOUD_FUN_RUNTIME=${{ github.event.inputs.CLOUD_FUN_RUNTIME }}" >> $GITHUB_ENV
-        echo "CLOUD_FUN_TIMEOUT=${{ github.event.inputs.CLOUD_FUN_TIMEOUT }}" >> $GITHUB_ENV
-        echo "DEPLOY_CLOUD_FUNCTION=${{ github.event.inputs.DEPLOY_CLOUD_FUNCTION }}" >> $GITHUB_ENV
+       shell: bash
+       run: |
+         echo "CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT=${{ github.event.inputs.CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT }}" >> $GITHUB_ENV
+         echo "SERVICE_ACCOUNT_KEYFILE_JSON=${{ github.event.inputs.SERVICE_ACCOUNT_KEYFILE_JSON }}" >> $GITHUB_ENV
+         echo "PROJECT_ID=${{ github.event.inputs.PROJECT_ID }}" >> $GITHUB_ENV
+         echo "CLOUD_FUN_MEMORY=${{ github.event.inputs.CLOUD_FUN_MEMORY }}" >> $GITHUB_ENV
+         echo "CLOUD_FUN_REGION=${{ github.event.inputs.CLOUD_FUN_REGION }}" >> $GITHUB_ENV
+         echo "CLOUD_FUN_RUNTIME=${{ github.event.inputs.CLOUD_FUN_RUNTIME }}" >> $GITHUB_ENV
+         echo "CLOUD_FUN_TIMEOUT=${{ github.event.inputs.CLOUD_FUN_TIMEOUT }}" >> $GITHUB_ENV
+         echo "DEPLOY_CLOUD_FUNCTION=${{ github.event.inputs.DEPLOY_CLOUD_FUNCTION }}" >> $GITHUB_ENV
         
-        # Mask the sensitive values
-        echo "::add-mask::${{ github.event.inputs.CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT }}"
-        echo "::add-mask::${{ github.event.inputs.SERVICE_ACCOUNT_KEYFILE_JSON }}"
-        echo "::add-mask::${{ github.event.inputs.PROJECT_ID }}"
-        echo "::add-mask::${{ github.event.inputs.CLOUD_FUN_MEMORY }}"
-        echo "::add-mask::${{ github.event.inputs.CLOUD_FUN_REGION }}"
-        echo "::add-mask::${{ github.event.inputs.CLOUD_FUN_RUNTIME }}"
-        echo "::add-mask::${{ github.event.inputs.CLOUD_FUN_TIMEOUT }}"
-        echo "::add-mask::${{ github.event.inputs.DEPLOY_CLOUD_FUNCTION }}"
+         # Mask the sensitive values
+         echo "::add-mask::${{ github.event.inputs.CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT }}"
+         echo "::add-mask::${{ github.event.inputs.SERVICE_ACCOUNT_KEYFILE_JSON }}"
+         echo "::add-mask::${{ github.event.inputs.PROJECT_ID }}"
+         echo "::add-mask::${{ github.event.inputs.CLOUD_FUN_MEMORY }}"
+         echo "::add-mask::${{ github.event.inputs.CLOUD_FUN_REGION }}"
+         echo "::add-mask::${{ github.event.inputs.CLOUD_FUN_RUNTIME }}"
+         echo "::add-mask::${{ github.event.inputs.CLOUD_FUN_TIMEOUT }}"
+         echo "::add-mask::${{ github.event.inputs.DEPLOY_CLOUD_FUNCTION }}"
 
-    - name: Debug DEPLOY_CLOUD_FUNCTION
-      shell: bash
-      run: |
-        echo "CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT is set to '$CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT'"
-        echo "SERVICE_ACCOUNT_KEYFILE_JSON is set to '$SERVICE_ACCOUNT_KEYFILE_JSON'"
-        echo "PROJECT_ID is set to '$PROJECT_ID'"
-        echo "CLOUD_FUN_MEMORY is set to '$CLOUD_FUN_MEMORY'"
-        echo "CLOUD_FUN_REGION is set to '$CLOUD_FUN_REGION'"
-        echo "CLOUD_FUN_RUNTIME is set to '$CLOUD_FUN_RUNTIME'"
-        echo "CLOUD_FUN_TIMEOUT is set to '$CLOUD_FUN_TIMEOUT'"
-        echo "DEPLOY_CLOUD_FUNCTION is set to '$DEPLOY_CLOUD_FUNCTION'"
+     - name: Debug DEPLOY_CLOUD_FUNCTION
+       shell: bash
+       run: |
+         echo "CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT is set to '$CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT'"
+         echo "SERVICE_ACCOUNT_KEYFILE_JSON is set to '$SERVICE_ACCOUNT_KEYFILE_JSON'"
+         echo "PROJECT_ID is set to '$PROJECT_ID'"
+         echo "CLOUD_FUN_MEMORY is set to '$CLOUD_FUN_MEMORY'"
+         echo "CLOUD_FUN_REGION is set to '$CLOUD_FUN_REGION'"
+         echo "CLOUD_FUN_RUNTIME is set to '$CLOUD_FUN_RUNTIME'"
+         echo "CLOUD_FUN_TIMEOUT is set to '$CLOUD_FUN_TIMEOUT'"
+         echo "DEPLOY_CLOUD_FUNCTION is set to '$DEPLOY_CLOUD_FUNCTION'"
         
     - name: Deploying image...
       shell: bash
