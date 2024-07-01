@@ -9,7 +9,7 @@ import com.google.api.client.http.HttpResponse;
 import com.google.cloud.functions.HttpFunction;
 
 @Component
-public class CSVToExcelHubOneFunction implements HttpFunction {
+public class CSVToExcelHubFunction implements HttpFunction {
 	@Bean
 	public CSVToExcelConvertor csvToExcelConverter() {
 		return new CSVToExcelConvertor();
