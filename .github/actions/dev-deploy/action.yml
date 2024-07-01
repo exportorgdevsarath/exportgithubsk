@@ -26,6 +26,16 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Echo inputs
+      run: |
+        echo "CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT: ${{ inputs.CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT }}"
+        echo "SERVICE_ACCOUNT_KEYFILE_JSON: ${{ inputs.SERVICE_ACCOUNT_KEYFILE_JSON }}"
+        echo "PROJECT_ID: ${{ inputs.PROJECT_ID }}"
+        echo "CLOUD_FUN_MEMORY: ${{ inputs.CLOUD_FUN_MEMORY }}"
+        echo "CLOUD_FUN_REGION: ${{ inputs.CLOUD_FUN_REGION }}"
+        echo "CLOUD_FUN_RUNTIME: ${{ inputs.CLOUD_FUN_RUNTIME }}"
+        echo "CLOUD_FUN_TIMEOUT: ${{ inputs.CLOUD_FUN_TIMEOUT }}"
+          
     - name: Deploying image...
       shell: bash
       run: |
@@ -61,6 +71,7 @@ runs:
 
     - name: Build the cloud function
       shell: bash
+      echo 
       run: |
         mkdir -p deployment
         cd BackendApp/src/functions/java
