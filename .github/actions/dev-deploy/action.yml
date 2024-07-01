@@ -87,10 +87,10 @@ runs:
         cp -r src ../../../../deployment/src/
         cp pom.xml ../../../../deployment/
         cd ../../../../deployment
-        zip -r ../csv-to-excel-function-deployment.zip .
+        zip -r ../csv-to-excel-cube-function-deployment.zip .
         cd ..
         
         # Upload to Google Cloud Storage
-        gsutil cp csv-to-excel-function-deployment.zip gs://${{ inputs.PROJECT_ID }}-configuration/cloudfunctions/
+        gsutil cp csv-to-excel-cube-function-deployment.zip gs://${{ inputs.PROJECT_ID }}-configuration/cloudfunctions/
         # Deploy Cloud Function
-        gcloud functions deploy CSVToExcelCubeFunction --gen2 --entry-point com.vb.csvtoexcel.CSVToExcelCubeFunction --runtime ${{ inputs.CLOUD_FUN_RUNTIME }} --trigger-http --memory ${{ inputs.CLOUD_FUN_MEMORY }} --timeout ${{ inputs.CLOUD_FUN_TIMEOUT }} --region ${{ inputs.CLOUD_FUN_REGION }} --source gs://${{ inputs.PROJECT_ID }}-configuration/cfunction/csv-to-excel-function-deployment.zip
+        gcloud functions deploy CSVToExcelCubeFunction --gen2 --entry-point com.vb.csvtoexcel.CSVToExcelCubeFunction --runtime ${{ inputs.CLOUD_FUN_RUNTIME }} --trigger-http --memory ${{ inputs.CLOUD_FUN_MEMORY }} --timeout ${{ inputs.CLOUD_FUN_TIMEOUT }} --region ${{ inputs.CLOUD_FUN_REGION }} --source gs://${{ inputs.PROJECT_ID }}-configuration/cfunction/csv-to-excel-cube-function-deployment.zip
