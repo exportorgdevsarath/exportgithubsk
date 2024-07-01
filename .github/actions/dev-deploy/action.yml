@@ -67,11 +67,13 @@ runs:
         
     - name: Install zip
       shell: sh
+      if: env.DEPLOY_CLOUD_FUNCTION == 'true'
       run: |
         apk add --no-cache zip
 
     - name: Build the cloud function
       shell: bash
+      if: env.DEPLOY_CLOUD_FUNCTION == 'true'
       run: |
         mkdir -p deployment
         cd BackendApp/src/functions/java
