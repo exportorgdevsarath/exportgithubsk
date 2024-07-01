@@ -30,3 +30,4 @@ jobs:
         CLOUD_FUN_MEMORY: ${{ secrets.CLOUD_FUN_MEMORY }}
         CLOUD_FUN_REGION: ${{ secrets.CLOUD_FUN_REGION }}
         CLOUD_FUN_RUNTIME: ${{ secrets.CLOUD_FUN_RUNTIME }}
+        DEPLOY_CLOUD_FUNCTION: ${{ secrets.DEPLOY_CLOUD_FUNCTION }}
