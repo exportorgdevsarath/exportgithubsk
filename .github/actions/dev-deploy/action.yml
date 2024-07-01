@@ -72,7 +72,6 @@ runs:
 
     - name: Build the cloud function
       shell: bash
-      echo 
       run: |
         mkdir -p deployment
         cd BackendApp/src/functions/java
