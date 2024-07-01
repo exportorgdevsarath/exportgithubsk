@@ -27,6 +27,7 @@ runs:
   using: "composite"
   steps:
     - name: Echo inputs
+      shell: bash
       run: |
         echo "CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT: ${{ inputs.CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT }}"
         echo "SERVICE_ACCOUNT_KEYFILE_JSON: ${{ inputs.SERVICE_ACCOUNT_KEYFILE_JSON }}"
