@@ -25,3 +25,8 @@ jobs:
       uses: ./.github/actions/dev-deploy
       with:
         CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT: ${{ secrets.CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT }}
+        PROJECT_ID: ${{ secrets.PROJECT_ID }}
+        CLOUD_FUN_TIMEOUT: ${{ secrets.CLOUD_FUN_TIMEOUT }}
+        CLOUD_FUN_MEMORY: ${{ secrets.CLOUD_FUN_MEMORY }}
+        CLOUD_FUN_REGION: ${{ secrets.CLOUD_FUN_REGION }}
+        CLOUD_FUN_RUNTIME: ${{ secrets.CLOUD_FUN_RUNTIME }}
