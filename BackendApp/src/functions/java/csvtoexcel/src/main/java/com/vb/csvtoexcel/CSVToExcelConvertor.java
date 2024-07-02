@@ -64,7 +64,8 @@ public class CSVToExcelConvertor {
 					List<String[]> rows = future.get();
 					for (String[] rowData : rows) {
 						if (rowNum == MAX_ROWS_PER_SHEET) {
-							throw new FileConversionException(429, "Max limit exceeds");
+							CloudLogger.logError("Max row limit reached ");
+							throw new FileConversionException(429, "MAXLIMIT_EXCEED_EXCEPTION");
 						}
 						Row row = sheet.createRow(rowNum++);
 						for (int colNum = 0; colNum < rowData.length; colNum++) {
@@ -74,6 +75,8 @@ public class CSVToExcelConvertor {
 					}
 				} catch (InterruptedException | ExecutionException e) {
 					throw new FileConversionException(1001);
+                } catch (FileConversionException e) {
+					throw e;
 				} catch (Exception e) {
 					throw new FileConversionException(500);
 				}
