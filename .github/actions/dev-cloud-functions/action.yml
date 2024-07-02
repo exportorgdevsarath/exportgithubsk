@@ -55,7 +55,7 @@ runs:
         mvn clean package
         ls -l target
         mkdir -p deployment
-        cp target/csv-to-excel-function-1.0-SNAPSHOT.jar ../../../../deployment/
+        cp target/csv-to-excel-function-1.0-SNAPSHOT.jar deployment/
         cp -r src deployment/src/
         cp pom.xml deployment/
         cd deployment
