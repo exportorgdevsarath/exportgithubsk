@@ -1,5 +1,5 @@
 name: dev-cloud-functions
-description: dev-deploy action for the pipeline
+description: dev-cloud-functions action for the pipeline
 
 inputs:
   CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT:
