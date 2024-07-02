@@ -1,0 +1,43 @@
+{
+	"name": "CREATE_SUCCESS",
+	"description":"Create success",
+	"inputModelName":"com.vanenburgdemo.exapp.model.Etable",
+	"outputModelName":"com.vanenburgdemo.exapp.model.Etable",
+	"setUp":[
+	       ],
+	"requestDetails":{
+			           "serviceType":"CREATE",
+			           "inputData":{
+                        "one":728,
+                        "two":"HfiJScxkTe11OOGg3eh4lkNVx",
+                        "three":"tgkD3CKt87AkPFvEWs0MISXLk"
+             },
+			           "method":"POST",
+			           "requestUrl":"/rest/etables/",
+			           "recordInfo":{
+                        "tableRecordNo":1,
+                        "tableName":"Etable"
+             },
+			           "userName":"AppAdmin",
+			           "fileAttachmentInfo":[ 
+             ],
+			           "lookupConfiguration":{
+             }		
+	       },
+	"outputData": [{
+                        "one":728,
+                        "two":"HfiJScxkTe11OOGg3eh4lkNVx",
+                        "three":"tgkD3CKt87AkPFvEWs0MISXLk"
+             }
+	       ],
+	"responseCode": 200,
+	"verifyUsingService":false,
+	"tearDown":{
+			     "Etable":{
+                        "method":"DELETE",
+                        "requestUrl":"/rest/etables/{ids}",
+                        "clearRecordsAfterTest":true,
+                        "userName":"AppAdmin"
+             }		
+	       }
+}

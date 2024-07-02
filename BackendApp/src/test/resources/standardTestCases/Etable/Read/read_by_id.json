@@ -1,0 +1,53 @@
+{
+	"name": "READ_BY_ID",
+	"description":"Read by id",
+	"inputModelName":"com.vanenburgdemo.exapp.model.Etable",
+	"outputModelName":"com.vanenburgdemo.exapp.model.Etable",
+	"setUp":[
+			   {
+				            "serviceType":"CREATE",
+				            "inputData":{
+                        "one":537,
+                        "two":"QI10nfhpQdpzM0kYZ9XVOygMZ",
+                        "three":"0yPAPDwsyUP54HnuYrYaQYyFB"
+             },
+				            "method":"POST",
+				            "requestUrl":"/rest/etables/",
+				            "recordInfo":{
+                        "tableRecordNo":1,
+                        "tableName":"Etable"
+             },
+				            "userName":"AppAdmin",
+				            "fileAttachmentInfo":[ 
+             ],
+				            "lookupConfiguration":{
+             }
+		     }
+	       ],
+	"requestDetails":{
+			           "serviceType":"GET_BY_SID",
+			           "method":"GET",
+			           "requestUrl":"/rest/etables/{sid}",
+			           "recordInfo":{
+                        "tableRecordNo":1,
+                        "tableName":"Etable"
+             },
+			           "userName":"AppAdmin"		
+	       },
+	"outputData": [{
+                        "one":537,
+                        "two":"QI10nfhpQdpzM0kYZ9XVOygMZ",
+                        "three":"0yPAPDwsyUP54HnuYrYaQYyFB"
+             }
+	       ],
+	"responseCode": 200,
+	"verifyUsingService":false,
+	"tearDown":{
+			     "Etable":{
+                        "method":"DELETE",
+                        "requestUrl":"/rest/etables/{ids}",
+                        "clearRecordsAfterTest":true,
+                        "userName":"AppAdmin"
+             }		
+	       }
+}

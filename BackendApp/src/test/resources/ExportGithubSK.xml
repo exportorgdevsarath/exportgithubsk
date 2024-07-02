@@ -3,6 +3,7 @@
 <suite name="Suite">
 	<test thread-count="1" name="Testexportgithubsk">
 	<packages>
+			<package name="com.vanenburgdemo.exapp.apitest.Etable"></package>
 		</packages>
 	</test>
 </suite> 

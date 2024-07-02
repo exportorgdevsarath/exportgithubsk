@@ -62,6 +62,37 @@
       ]
     }
   },
+  "etables": {
+    "post": {
+      "/datatable": [
+        "App Admin"
+      ],
+      "/": [
+        "App Admin"
+      ]
+    },
+    "get": {
+      "/{sid}": [
+        "App Admin"
+      ],
+      "/autosuggest": [
+        "App Admin"
+      ]
+    },
+    "put": {
+      "/": [
+        "App Admin"
+      ]
+    },
+    "delete": {
+      "/{ids}": [
+        "App Admin"
+      ],
+      "/{id}/delete/{ids}": [
+        "App Admin"
+      ]
+    }
+  },
   "changelogs": {
     "post": {
       "/datatable/{entityName}/{entityId}/{fieldName}/{fromModifiedDate}": [

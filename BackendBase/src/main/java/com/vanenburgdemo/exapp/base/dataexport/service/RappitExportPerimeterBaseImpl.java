@@ -58,6 +58,12 @@ public class RappitExportPerimeterBaseImpl<T extends RappitExportBase> implement
 						case "Application User export 1":
 			return true;
 
+			case "Etable export 1":
+			return true;
+
+			case "Etable export 2":
+			return true;
+
 		}
 		return false;
 	}

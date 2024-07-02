@@ -1,0 +1,60 @@
+{
+	"name": "UPDATE_SUCCESS",
+	"description":"Update success",
+	"inputModelName":"com.vanenburgdemo.exapp.model.Etable",
+	"outputModelName":"com.vanenburgdemo.exapp.model.Etable",
+	"setUp":[
+			   {
+				            "serviceType":"CREATE",
+				            "inputData":{
+                        "one":355,
+                        "two":"hffTTXtLJFpbCL44FAdV22Xvk",
+                        "three":"2GU5YWLwNLfdEE2X3aMvJPkOx"
+             },
+				            "method":"POST",
+				            "requestUrl":"/rest/etables/",
+				            "recordInfo":{
+                        "tableRecordNo":1,
+                        "tableName":"Etable"
+             },
+				            "userName":"AppAdmin",
+				            "fileAttachmentInfo":[ 
+             ],
+				            "lookupConfiguration":{
+             }
+		     }
+	       ],
+	"requestDetails":{
+			           "serviceType":"UPDATE",
+			           "inputData":{
+                        "two":"8sSpALpcWSukjR2iPxvc0fH4d",
+                        "three":"y9QGGUVkgtKuOlIACwHE7rILA",
+                        "one":334
+             },
+			           "method":"PUT",
+			           "requestUrl":"/rest/etables/",
+			           "recordInfo":{
+                        "tableRecordNo":1,
+                        "tableName":"Etable"
+             },
+			           "userName":"AppAdmin",
+			           "lookupConfiguration":{
+             }		
+	       },
+	"outputData": [{
+                        "two":"8sSpALpcWSukjR2iPxvc0fH4d",
+                        "three":"y9QGGUVkgtKuOlIACwHE7rILA",
+                        "one":334
+             }
+	       ],
+	"responseCode": 200,
+	"verifyUsingService":false,
+	"tearDown":{
+			     "Etable":{
+                        "method":"DELETE",
+                        "requestUrl":"/rest/etables/{ids}",
+                        "clearRecordsAfterTest":true,
+                        "userName":"AppAdmin"
+             }		
+	       }
+}
