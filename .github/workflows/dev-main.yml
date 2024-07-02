@@ -33,7 +33,7 @@ jobs:
         DEPLOY_CLOUD_FUNCTION: ${{ secrets.DEPLOY_CLOUD_FUNCTION }}
 
     - name: Building Cloud Functions...
-      uses: ./.github/actions/dev-cloud-build
+      uses: ./.github/actions/dev-cloud-functions
       with:
         CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT: ${{ secrets.CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT }}
         PROJECT_ID: ${{ secrets.PROJECT_ID }}
