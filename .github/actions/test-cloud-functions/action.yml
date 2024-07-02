@@ -1,5 +1,5 @@
-name: dev-cloud-functions
-description: dev-cloud-functions action for the pipeline
+name: test-cloud-functions
+description: test-cloud-functions action for the pipeline
 
 inputs:
   CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT:
