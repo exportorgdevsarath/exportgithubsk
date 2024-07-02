@@ -34,6 +34,21 @@
     },
     "label" : "EXPORTS",
     "element" : "menuItem"
+  }, {
+    "pathsInvolved" : [ "/etable/etablelist", "/etable/etabledetail" ],
+    "accessControl" : [ "all" ],
+    "onClick" : "navigate_to_page",
+    "outline" : false,
+    "infiniteScroll" : false,
+    "valueChange" : true,
+    "currentNode" : "ca0caf29-d5b3-4599-8360-61d51fca3dd0",
+    "label" : "EXP",
+    "page" : {
+      "sid" : "184d5b1f-4001-4658-926b-e12455062907",
+      "name" : "Etable List",
+      "url" : "/etable/etablelist"
+    },
+    "element" : "menuItem"
   } ],
   "topBarLeft" : [ ],
   "topBarMiddle" : [ ],

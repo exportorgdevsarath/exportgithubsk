@@ -27,6 +27,10 @@ export const routes: Routes = [
       {
         path: 'applicationuser',
         loadChildren: () => import('@app/application-user/application-user.module').then(m => m.ApplicationUserModule)
+      },
+      {
+        path: 'etable',
+        loadChildren: () => import('@app/etable/etable.module').then(m => m.EtableModule)
       }
    	]
   }
