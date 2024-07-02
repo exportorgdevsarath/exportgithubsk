@@ -21,16 +21,16 @@ jobs:
         ARTIFACTORY_USER: ${{ secrets.ARTIFACTORY_USER }}
         ARTIFACTORY_PASS: ${{ secrets.ARTIFACTORY_PASS }}
     
-    - name: Deploying...
-      uses: ./.github/actions/dev-deploy
-      with:
-        CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT: ${{ secrets.CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT }}
-        PROJECT_ID: ${{ secrets.PROJECT_ID }}
-        CLOUD_FUN_TIMEOUT: ${{ secrets.CLOUD_FUN_TIMEOUT }}
-        CLOUD_FUN_MEMORY: ${{ secrets.CLOUD_FUN_MEMORY }}
-        CLOUD_FUN_REGION: ${{ secrets.CLOUD_FUN_REGION }}
-        CLOUD_FUN_RUNTIME: ${{ secrets.CLOUD_FUN_RUNTIME }}
-        DEPLOY_CLOUD_FUNCTION: ${{ secrets.DEPLOY_CLOUD_FUNCTION }}
+    # - name: Deploying...
+    #   uses: ./.github/actions/dev-deploy
+    #   with:
+    #     CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT: ${{ secrets.CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT }}
+    #     PROJECT_ID: ${{ secrets.PROJECT_ID }}
+    #     CLOUD_FUN_TIMEOUT: ${{ secrets.CLOUD_FUN_TIMEOUT }}
+    #     CLOUD_FUN_MEMORY: ${{ secrets.CLOUD_FUN_MEMORY }}
+    #     CLOUD_FUN_REGION: ${{ secrets.CLOUD_FUN_REGION }}
+    #     CLOUD_FUN_RUNTIME: ${{ secrets.CLOUD_FUN_RUNTIME }}
+    #     DEPLOY_CLOUD_FUNCTION: ${{ secrets.DEPLOY_CLOUD_FUNCTION }}
 
     - name: Building Cloud Functions...
       uses: ./.github/actions/dev-cloud-functions
