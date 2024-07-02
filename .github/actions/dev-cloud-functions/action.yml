@@ -51,14 +51,14 @@ runs:
       shell: bash
       if: ${{ inputs.DEPLOY_CLOUD_FUNCTION == 'true' }}
       run: |
-        mkdir -p deployment
-        cd BackendApp/src/functions/java
+        cd BackendApp/src/functions/java/csvtoexcel
         mvn clean package
         ls -l target
-        cp target/csv-to-excel-dev-function-1.0-SNAPSHOT.jar ../../../../deployment/
-        cp -r src ../../../../deployment/src/
-        cp pom.xml ../../../../deployment/
-        cd ../../../../deployment
+        mkdir -p deployment
+        cp target/csv-to-excel-function-1.0-SNAPSHOT.jar ../../../../deployment/
+        cp -r src deployment/src/
+        cp pom.xml deployment/
+        cd deployment
         zip -r ../csv-to-excel-cube-function-deployment.zip .
         cd ..
         
