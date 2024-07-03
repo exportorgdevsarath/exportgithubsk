@@ -34,6 +34,7 @@ public class CSVToExcelFunction implements HttpFunction {
 			csvToExcelConverter.convertCSVToExcel(bucketName, csvFileName, excelFileName);
 			response.setStatusCode(200, "CSV file successfully converted to Excel and written to Cloud Storage.");
 		} catch (FileConversionException e) {
+			System.out.print("Error code : "+e.getErrorCode());
 			setResponseExceptionError(response, e);
 		} catch (OutOfMemoryError outOfMemoryError) {
 			CloudLogger.logError("Error processing CSV file: errorcode " +outOfMemoryError.getMessage());
@@ -47,25 +48,31 @@ public class CSVToExcelFunction implements HttpFunction {
 	}
 	
 	private void setResponseExceptionError(com.google.cloud.functions.HttpResponse response, FileConversionException e) {
+		System.out.print("setResponseExceptionError Error code : "+e.getErrorCode());
 		switch (e.getErrorCode()) {
 			case 429:
+				System.out.print("setResponseExceptionError Error code : 429");
 				response.appendHeader("X-Failure-Code", "429");
 				response.setStatusCode(429, "The export reached the maximum number of rows in an excel sheet");
 				break;
 			case 1001:
+				System.out.print("setResponseExceptionError Error code : 1001");
 				response.appendHeader("X-Failure-Code", "1001");
 				response.setStatusCode(503, "Export excel conversion failed with Interuption exception");
 				break;
 			case 1002:
+				System.out.print("setResponseExceptionError Error code : 1002");
 				response.appendHeader("X-Failure-Code", "1002");
 				response.setStatusCode(500, "Export excel conversion failed with Excel write IO exception");
 				break;
 			default:
+				System.out.print("setResponseExceptionError Error code : default");
 				response.appendHeader("X-Failure-Code", "500");
 				response.setStatusCode(500, "Cloud Function execution has failed");
 				break;
 		}
 		CloudLogger.logError("Error processing CSV file: errorcode " +e.getErrorCode());
 		CloudLogger.logError("Error processing CSV file: error msg " +e.getMessage());
+		System.out.print("setResponseExceptionError header :"+response.getHeaders().get("X-Failure-Code"));
 	}
 }
