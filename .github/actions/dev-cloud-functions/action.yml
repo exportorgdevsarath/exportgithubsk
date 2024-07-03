@@ -37,7 +37,7 @@ runs:
     shell: bash
     if: ${{ inputs.DEPLOY_CLOUD_FUNCTION == 'true' }}
     run: |
-      cd BackendApp/src/functions/java
+      cd BackendApp/src/functions/java/csvtoexce;
       mvn clean package
       ls -l target
       mkdir -p deployment
