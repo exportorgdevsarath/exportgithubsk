@@ -21,9 +21,9 @@ public class CloudStorageService {
     }
 
     public InputStream readCsvFile(String bucketName, String fileName) {
-    	CloudLogger.logInfo("reading file");
+    	//CloudLogger.logInfo("reading file");
     	Blob blob = storage.get(bucketName, fileName);
-    	CloudLogger.logInfo("end reading file");
+    	//CloudLogger.logInfo("end reading file");
     	
     	return Channels.newInputStream(blob.reader());
     }
@@ -35,9 +35,9 @@ public class CloudStorageService {
     }
     
     public InputStream getCsvInputStream(String bucketName, String csvFileName) throws IOException {
-    	CloudLogger.logInfo("start reading file");
+    	//CloudLogger.logInfo("start reading file");
     	Blob csvBlob =  storage.get(bucketName, csvFileName);
-    	CloudLogger.logInfo("end reading file");
+    	//CloudLogger.logInfo("end reading file");
         if (csvBlob == null) {
             throw new IOException("CSV file not found in the specified bucket.");
         }
