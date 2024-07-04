@@ -25,12 +25,6 @@ public class CSVToExcelFunction implements HttpFunction {
 		String csvFileName = request.getFirstQueryParameter("csvFileName").orElse("");
 		String bucketName = request.getFirstQueryParameter("bucketName").orElse("");
 		String excelFileName = request.getFirstQueryParameter("excelFileName").orElse("");
-		if (true) {
-			System.out.print("setResponseExceptionError Error code : 1001");
-			response.appendHeader("X-Failure-Code", "1001");
-			response.setStatusCode(503, "Export excel conversion failed with Interuption exception");
-			return;
-		}
 		
 		if (StringUtils.isEmpty(csvFileName) || StringUtils.isEmpty(bucketName) || StringUtils.isEmpty(excelFileName)) {
 			throw new Exception("Input query params 'csvFileName' or 'csvFileName' or 'bucketName' are missing");
@@ -39,17 +33,21 @@ public class CSVToExcelFunction implements HttpFunction {
 		try {
 			csvToExcelConverter.convertCSVToExcel(bucketName, csvFileName, excelFileName);
 			response.setStatusCode(200, "CSV file successfully converted to Excel and written to Cloud Storage.");
+			return;
 		} catch (FileConversionException e) {
 			System.out.print("Error code : "+e.getErrorCode());
 			setResponseExceptionError(response, e);
+			return;
 		} catch (OutOfMemoryError outOfMemoryError) {
 			CloudLogger.logError("Error processing CSV file: errorcode " +outOfMemoryError.getMessage());
 			response.appendHeader("X-Failure-Code", "1003");
 			response.setStatusCode(500, "OutOfMemoryError processing CSV file: " + outOfMemoryError.getMessage());
+			return;
 		} catch (Exception e) {
 			CloudLogger.logError("Error processing CSV file: errorcode " +e.getMessage());
 			response.appendHeader("X-Failure-Code", "500");
 			response.setStatusCode(500, "Error processing CSV file: " + e.getMessage());
+			return;
 		}
 	}
 	
@@ -60,22 +58,22 @@ public class CSVToExcelFunction implements HttpFunction {
 				System.out.print("setResponseExceptionError Error code : 429");
 				response.appendHeader("X-Failure-Code", "429");
 				response.setStatusCode(429, "The export reached the maximum number of rows in an excel sheet");
-				break;
+				return;
 			case 1001:
 				System.out.print("setResponseExceptionError Error code : 1001");
 				response.appendHeader("X-Failure-Code", "1001");
 				response.setStatusCode(503, "Export excel conversion failed with Interuption exception");
-				break;
+				return;
 			case 1002:
 				System.out.print("setResponseExceptionError Error code : 1002");
 				response.appendHeader("X-Failure-Code", "1002");
 				response.setStatusCode(500, "Export excel conversion failed with Excel write IO exception");
-				break;
+				return;
 			default:
 				System.out.print("setResponseExceptionError Error code : default");
 				response.appendHeader("X-Failure-Code", "500");
 				response.setStatusCode(500, "Cloud Function execution has failed");
-				break;
+				return;
 		}
 		CloudLogger.logError("Error processing CSV file: errorcode " +e.getErrorCode());
 		CloudLogger.logError("Error processing CSV file: error msg " +e.getMessage());
