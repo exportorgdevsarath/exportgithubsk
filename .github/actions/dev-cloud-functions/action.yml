@@ -1,1 +1,54 @@
+name: dev-cloud-functions
+description: dev-cloud-functions action for the pipeline
 
+inputs:
+  CLOUD_RUN_DEFAULT_SERVICE_ACCOUNT:
+    required: true
+
+  PROJECT_ID:
+    required: true
+
+  CLOUD_FUN_MEMORY:
+    required: true
+
+  CLOUD_FUN_REGION:
+    required: true
+
+  CLOUD_FUN_RUNTIME:
+    required: true
+
+  CLOUD_FUN_TIMEOUT:
+    required: true
+
+  DEPLOY_CLOUD_FUNCTION:
+    required: true
+
+runs:
+  using: "composite"
+
+  steps:
+  - name: Install zip
+    shell: sh
+    if: ${{ inputs.DEPLOY_CLOUD_FUNCTION == 'true' }}
+    run: |
+      apk add --no-cache zip
+  - name: Build the cloud function
+    shell: bash
+    if: ${{ inputs.DEPLOY_CLOUD_FUNCTION == 'true' }}
+    run: |
+      cd BackendApp/src/functions/java/csvtoexcel
+      mvn clean package
+      ls -l target
+      mkdir -p deployment
+      cp target/csv-to-excel-function-1.0-SNAPSHOT.jar deployment/
+      cp -r src deployment/src/
+      cp pom.xml deployment/
+      cd deployment
+      zip -r ../csv-to-excel-function-deployment.zip .
+      cd ..
+        
+      # Upload to Google Cloud Storage
+      gsutil cp csv-to-excel-function-deployment.zip gs://${{ inputs.PROJECT_ID }}-configuration/cloudfunctions/
+      # Deploy Cloud Function
+      echo gs://${{ inputs.PROJECT_ID }}-configuration/cfunction/csv-to-excel-function-deployment.zip
+      gcloud functions deploy CSVToExcelFunction --gen2 --entry-point com.vb.csvtoexcel.CSVToExcelFunction --runtime ${{ inputs.CLOUD_FUN_RUNTIME }} --trigger-http --memory ${{ inputs.CLOUD_FUN_MEMORY }} --timeout ${{ inputs.CLOUD_FUN_TIMEOUT }} --region ${{ inputs.CLOUD_FUN_REGION }} --source gs://${{ inputs.PROJECT_ID }}-configuration/cfunction/csv-to-excel-function-deployment.zip
