@@ -41,12 +41,12 @@ public class CSVToExcelFunction implements HttpFunction {
 		} catch (OutOfMemoryError outOfMemoryError) {
 			CloudLogger.logError("Error processing CSV file: errorcode " +outOfMemoryError.getMessage());
 			response.appendHeader("X-Failure-Code", "1003");
-			response.setStatusCode(500, "OutOfMemoryError processing CSV file: " + outOfMemoryError.getMessage());
+			response.setStatusCode(429, "OutOfMemoryError processing CSV file: " + outOfMemoryError.getMessage());
 			return;
 		} catch (Exception e) {
 			CloudLogger.logError("Error processing CSV file: errorcode " +e.getMessage());
 			response.appendHeader("X-Failure-Code", "500");
-			response.setStatusCode(500, "Error processing CSV file: " + e.getMessage());
+			response.setStatusCode(429, "Error processing CSV file: " + e.getMessage());
 			return;
 		}
 	}
@@ -67,12 +67,12 @@ public class CSVToExcelFunction implements HttpFunction {
 			case 1002:
 				System.out.print("setResponseExceptionError Error code : 1002");
 				response.appendHeader("X-Failure-Code", "1002");
-				response.setStatusCode(500, "Export excel conversion failed with Excel write IO exception");
+				response.setStatusCode(429, "Export excel conversion failed with Excel write IO exception");
 				return;
 			default:
 				System.out.print("setResponseExceptionError Error code : default");
 				response.appendHeader("X-Failure-Code", "500");
-				response.setStatusCode(500, "Cloud Function execution has failed");
+				response.setStatusCode(429, "Cloud Function execution has failed");
 				return;
 		}
 		//CloudLogger.logError("Error processing CSV file: errorcode " +e.getErrorCode());
