@@ -25,6 +25,12 @@ public class CSVToExcelFunction implements HttpFunction {
 		String csvFileName = request.getFirstQueryParameter("csvFileName").orElse("");
 		String bucketName = request.getFirstQueryParameter("bucketName").orElse("");
 		String excelFileName = request.getFirstQueryParameter("excelFileName").orElse("");
+		if (true) {
+			System.out.print("setResponseExceptionError Error code : 1001");
+			response.appendHeader("X-Failure-Code", "1001");
+			response.setStatusCode(503, "Export excel conversion failed with Interuption exception");
+			return;
+		}
 		
 		if (StringUtils.isEmpty(csvFileName) || StringUtils.isEmpty(bucketName) || StringUtils.isEmpty(excelFileName)) {
 			throw new Exception("Input query params 'csvFileName' or 'csvFileName' or 'bucketName' are missing");
