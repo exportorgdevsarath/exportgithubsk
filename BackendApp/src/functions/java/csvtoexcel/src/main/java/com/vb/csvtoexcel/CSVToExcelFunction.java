@@ -73,7 +73,7 @@ public class CSVToExcelFunction implements HttpFunction {
 				System.out.print("setResponseExceptionError Error code : default");
 				response.appendHeader("X-Failure-Code", "500");
 				response.setStatusCode(429, "Cloud Function execution has failed");
-				return;
+				//return;
 		}
 		CloudLogger.logError("Error processing CSV file: errorcode " +e.getErrorCode());
 		CloudLogger.logError("Error processing CSV file: error msg " +e.getMessage());
