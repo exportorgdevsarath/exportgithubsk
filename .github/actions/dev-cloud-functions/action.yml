@@ -1,2 +1,8 @@
 name: dev-cloud-functions
 description: dev-cloud-functions action for the pipeline
+
+runs:
+  using: "composite"
+  steps:
+    - name: Excel export is not configured
+      run: echo "Excel export is not configured"
