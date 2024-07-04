@@ -39,12 +39,12 @@ public class CSVToExcelFunction implements HttpFunction {
 			setResponseExceptionError(response, e);
 			return;
 		} catch (OutOfMemoryError outOfMemoryError) {
-			CloudLogger.logError("Error processing CSV file: errorcode " +outOfMemoryError.getMessage());
+			//CloudLogger.logError("Error processing CSV file: errorcode " +outOfMemoryError.getMessage());
 			response.appendHeader("X-Failure-Code", "1003");
 			response.setStatusCode(429, "OutOfMemoryError processing CSV file: " + outOfMemoryError.getMessage());
 			return;
 		} catch (Exception e) {
-			CloudLogger.logError("Error processing CSV file: errorcode " +e.getMessage());
+			//CloudLogger.logError("Error processing CSV file: errorcode " +e.getMessage());
 			response.appendHeader("X-Failure-Code", "500");
 			response.setStatusCode(429, "Error processing CSV file: " + e.getMessage());
 			return;
